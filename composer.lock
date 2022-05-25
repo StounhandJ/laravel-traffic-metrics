@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0004c6fc1503f932fcf340fda8f7af07",
+    "content-hash": "8fb850c31e73112686c3630ec114d40e",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -881,12 +881,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b720a2d0ff4a135ee0ef542082b2b979ff1f1d14"
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b720a2d0ff4a135ee0ef542082b2b979ff1f1d14",
-                "reference": "b720a2d0ff4a135ee0ef542082b2b979ff1f1d14",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
+                "reference": "74a8602c6faec9ef74b7a9391ac82c5e65b1cdab",
                 "shasum": ""
             },
             "require": {
@@ -982,7 +982,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/master"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.3"
             },
             "funding": [
                 {
@@ -998,7 +998,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-16T15:07:31+00:00"
+            "time": "2022-05-25T13:24:33+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1207,12 +1207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "21959000a2d64e1aae8d8c12d256c0a0234715f2"
+                "reference": "105037b619bb1e180e79e2e0c634294d1859b406"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/21959000a2d64e1aae8d8c12d256c0a0234715f2",
-                "reference": "21959000a2d64e1aae8d8c12d256c0a0234715f2",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/105037b619bb1e180e79e2e0c634294d1859b406",
+                "reference": "105037b619bb1e180e79e2e0c634294d1859b406",
                 "shasum": ""
             },
             "require": {
@@ -1379,7 +1379,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-24T20:54:44+00:00"
+            "time": "2022-05-25T14:41:06+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1782,14 +1782,8 @@
             "version": "v1.7.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mateusjunges/laravel-kafka.git",
-                "reference": "de694139077bd8c7218d4688d63963f0d5cd78ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mateusjunges/laravel-kafka/zipball/de694139077bd8c7218d4688d63963f0d5cd78ff",
-                "reference": "de694139077bd8c7218d4688d63963f0d5cd78ff",
-                "shasum": ""
+                "url": "lib/laravel-traffic",
+                "reference": "bb0502be507d0c31ca477a225dc098d6ca90255c"
             },
             "require": {
                 "ext-rdkafka": "^4.0|^5.0|^6.0",
@@ -1819,7 +1813,19 @@
                     "Junges\\Kafka\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Junges\\Kafka\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit tests"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes --config=.php_cs.dist.php"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1831,11 +1837,7 @@
                 }
             ],
             "description": "A kafka driver for laravel",
-            "support": {
-                "issues": "https://github.com/mateusjunges/laravel-kafka/issues",
-                "source": "https://github.com/mateusjunges/laravel-kafka/tree/v1.7.x"
-            },
-            "time": "2022-05-23T12:57:09+00:00"
+            "time": "2022-05-25T14:40:33+00:00"
         },
         {
             "name": "monolog/monolog",

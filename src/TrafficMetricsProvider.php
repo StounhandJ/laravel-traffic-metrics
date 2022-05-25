@@ -5,6 +5,7 @@ namespace StounhandJ\LaravelTrafficMetrics;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use StounhandJ\LaravelTrafficMetrics\Command\CheckViewsCommand;
 use StounhandJ\LaravelTrafficMetrics\Contracts\Metrics as MetricsContract;
 
 class TrafficMetricsProvider extends ServiceProvider
@@ -31,16 +32,20 @@ class TrafficMetricsProvider extends ServiceProvider
     {
         if (app()->runningInConsole()) {
 
+            $this->commands([
+                CheckViewsCommand::class,
+            ]);
+
             $this->publishes([
                 __DIR__ . '/../config/trafficMetrics.php' => config_path('trafficMetrics.php'),
             ], 'traffic-metrics');
-
-            $this->app->bind(MetricsContract::class, config('trafficMetrics.models.metrics'));
 
             $this->publishes([
                 __DIR__ . '/../migrations/create_metrics.php' => $this->getMigrationFileName('create_metrics.php'),
             ], 'traffic-metrics');
         }
+
+        $this->app->bind(MetricsContract::class, config('trafficMetrics.models.metrics'));
     }
 
     /**
