@@ -39,7 +39,7 @@ class TrafficMetricsProvider extends ServiceProvider
 
             $this->publishes([
                 __DIR__ . '/../migrations/create_metrics.php' => $this->getMigrationFileName('create_metrics.php'),
-            ], 'migrations');
+            ], 'traffic-metrics');
         }
     }
 
