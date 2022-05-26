@@ -3,11 +3,6 @@
 
 return [
 
-    /*
-     | Your kafka brokers url.
-     */
-    'kafka_brokers' => env('KAFKA_BROKERS', 'localhost:9092'),
-
     'models' => [
         'metrics' => StounhandJ\LaravelTrafficMetrics\Models\Metrics::class,
 

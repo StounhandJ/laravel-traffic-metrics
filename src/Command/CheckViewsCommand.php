@@ -48,7 +48,7 @@ class CheckViewsCommand extends Command
     public function handle()
     {
 //        app(MetricsContract::class)->findByUri('other-permission');
-        $consumer = Kafka::createConsumer(['topic'], 'check-consumer', config('trafficMetrics.kafka_brokers'))
+        $consumer = Kafka::createConsumer(['topic'], 'check-consumer')
             ->enableBatching()
             ->withBatchSizeLimit(2)
             ->withBatchReleaseInterval(10000)

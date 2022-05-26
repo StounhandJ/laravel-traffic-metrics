@@ -18,7 +18,7 @@ class MetricsMiddleware
             ]
         );
 
-        $producer = Kafka::publishOn('topic', config('trafficMetrics.kafka_brokers'))->withMessage($message);
+        $producer = Kafka::publishOn('topic')->withMessage($message);
         $producer->send();
         return $next($request);
     }
