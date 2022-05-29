@@ -11,6 +11,13 @@ class Metrics extends Model implements MetricsContract
 {
     use HasFactory;
 
+    const CREATED_AT = 'first_view';
+    const UPDATED_AT = 'last_view';
+
+    public $timestamps = true;
+
+    protected $fillable = ["uri", "views", "last_view"];
+
     public function getTable()
     {
         return config('trafficMetrics.models.metrics_table_name', parent::getTable());
@@ -23,7 +30,7 @@ class Metrics extends Model implements MetricsContract
 
     public static function findByUri(string $uri): \Illuminate\Database\Eloquent\Builder|Metrics
     {
-        return static::query()->where('uri', $uri)->first();
+        return static::query()->where('uri', $uri)->first() ?? new Metrics();
     }
 
     public static function create(string $uri): \Illuminate\Database\Eloquent\Builder|Metrics

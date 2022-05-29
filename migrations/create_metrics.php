@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->id();
             $table->string("uri", $columnUriSize);
             $table->integer("views");
-            $table->dateTime("last_view");
+            $table->timestamp('last_view')->nullable();
+            $table->timestamp('first_view')->nullable();
         });
     }
 

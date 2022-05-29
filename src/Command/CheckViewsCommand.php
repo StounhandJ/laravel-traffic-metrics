@@ -4,14 +4,8 @@ namespace StounhandJ\LaravelTrafficMetrics\Command;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
-use Junges\Kafka\Consumers\CallableConsumer;
-use Junges\Kafka\Consumers\Consumer;
 use Junges\Kafka\Contracts\KafkaConsumerMessage;
 use Junges\Kafka\Facades\Kafka;
-use Junges\Kafka\Message\Message;
-use mysql_xdevapi\Exception;
 use StounhandJ\LaravelTrafficMetrics\Contracts\Metrics as MetricsContract;
 
 class CheckViewsCommand extends Command
@@ -47,21 +41,43 @@ class CheckViewsCommand extends Command
      */
     public function handle()
     {
-//        app(MetricsContract::class)->findByUri('other-permission');
         $consumer = Kafka::createConsumer(['topic'], 'check-consumer')
-            ->enableBatching()
-            ->withBatchSizeLimit(2)
-            ->withBatchReleaseInterval(10000)
-            ->withHandler(function (Collection $collection) {
-                throw new Exception();
+            ->withHandler(function (KafkaConsumerMessage $message) {
+                global $above;
+                if ($above == null)
+                    $above = [];
+
+                $ip = $message->getBody()["ip"];
+                $uri = $message->getBody()["uri"];
+
+                if (!array_key_exists($uri, $above))
+                    $above[$uri] = [];
+
+                if (!array_key_exists($ip, $above[$uri])
+                    || $message->getTimestamp() - $above[$uri][$ip] > 60000
+                ) {
+                    var_dump($above);
+                    if (array_key_exists($ip, $above[$uri])) {
+                        $this->info(Carbon::now()->timestamp);
+                        $this->info($above[$uri][$ip]);
+                        $this->info(Carbon::now()->timestamp - $above[$uri][$ip]);
+                    }
+                    $above[$uri][$ip] = $message->getTimestamp();
+                    $metrics = app(MetricsContract::class)->findByUri($uri);
+                    if (!$metrics->exists) {
+                        $metrics = app(MetricsContract::class)::create($uri);
+                    }
+
+                    $metrics->addViews();
+                }
+
+                $this->info("Сообщение");
             })
             ->build();
 
-        $this->info("Проверка файлов");
-
         $consumer->consume();
-        //Прописать получения данных из очереди и сложения просмотров по ip учитывая интервал для одного пользователя по адресу
-        // Интервал указывать в конфиге
+
+        $this->info("Конец");
         return 0;
     }
 }
