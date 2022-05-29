@@ -41,7 +41,7 @@ class CheckViewsCommand extends Command
      */
     public function handle()
     {
-        $consumer = Kafka::createConsumer(['topic'], 'check-consumer')
+        $consumer = Kafka::createConsumer([config('trafficMetrics.topic')], config('trafficMetrics.consumer_group_id'))
             ->withHandler(function (KafkaConsumerMessage $message) {
                 global $above;
                 if ($above == null)
@@ -54,7 +54,7 @@ class CheckViewsCommand extends Command
                     $above[$uri] = [];
 
                 if (!array_key_exists($ip, $above[$uri])
-                    || $message->getTimestamp() - $above[$uri][$ip] > 60000
+                    || $message->getTimestamp() - $above[$uri][$ip] > config('trafficMetrics.milliseconds')
                 ) {
                     var_dump($above);
                     if (array_key_exists($ip, $above[$uri])) {
@@ -69,15 +69,15 @@ class CheckViewsCommand extends Command
                     }
 
                     $metrics->addViews();
-                }
 
-                $this->info("Сообщение");
+                    $this->info(sprintf("%s visit %s", $ip, $uri));
+                }
             })
             ->build();
 
         $consumer->consume();
 
-        $this->info("Конец");
+        $this->info("Bye ;<");
         return 0;
     }
 }

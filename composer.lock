@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1cd94a4ca02744d2267a9ba854bb20ca",
+    "content-hash": "c30d7d2cae313320aff85b238aeb05c9",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1207,12 +1207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "105037b619bb1e180e79e2e0c634294d1859b406"
+                "reference": "acddea7ab355f218f193bea071d6d63257a68c46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/105037b619bb1e180e79e2e0c634294d1859b406",
-                "reference": "105037b619bb1e180e79e2e0c634294d1859b406",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/acddea7ab355f218f193bea071d6d63257a68c46",
+                "reference": "acddea7ab355f218f193bea071d6d63257a68c46",
                 "shasum": ""
             },
             "require": {
@@ -1379,7 +1379,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-25T14:41:06+00:00"
+            "time": "2022-05-28T00:32:16+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1782,8 +1782,14 @@
             "version": "v1.7.x-dev",
             "source": {
                 "type": "git",
-                "url": "lib/laravel-traffic",
-                "reference": "bb0502be507d0c31ca477a225dc098d6ca90255c"
+                "url": "https://github.com/mateusjunges/laravel-kafka.git",
+                "reference": "92ec2f1ec81cd8f8091c2e163405bc576758638b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mateusjunges/laravel-kafka/zipball/92ec2f1ec81cd8f8091c2e163405bc576758638b",
+                "reference": "92ec2f1ec81cd8f8091c2e163405bc576758638b",
+                "shasum": ""
             },
             "require": {
                 "ext-rdkafka": "^4.0|^5.0|^6.0",
@@ -1813,19 +1819,7 @@
                     "Junges\\Kafka\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Junges\\Kafka\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit tests"
-                ],
-                "format": [
-                    "vendor/bin/php-cs-fixer fix --allow-risky=yes --config=.php_cs.dist.php"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1837,7 +1831,11 @@
                 }
             ],
             "description": "A kafka driver for laravel",
-            "time": "2022-05-25T14:40:33+00:00"
+            "support": {
+                "issues": "https://github.com/mateusjunges/laravel-kafka/issues",
+                "source": "https://github.com/mateusjunges/laravel-kafka/tree/v1.7.x"
+            },
+            "time": "2022-05-25T12:41:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5315,7 +5313,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.0"
+        "php": "^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
