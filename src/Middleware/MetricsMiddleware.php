@@ -14,7 +14,7 @@ class MetricsMiddleware
         $message = new Message(
             body: [
                 'ip' => $request->ip(),
-                'uri' => $request->url()
+                'uri' => $request->path()
             ]
         );
 
